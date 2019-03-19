@@ -875,7 +875,10 @@ malloc_conf_init(void) {
 	const char *opts, *k, *v;
 	size_t klen, vlen;
 
-	for (i = 0; i < 4; i++) {
+    /* only the first to configuration possibilites work for rust
+     * sandbox */
+	for (i = 0; i < 2; i++) {
+	/* for (i = 0; i < 4; i++) { */
 		/* Get runtime configuration. */
 		switch (i) {
 		case 0:
