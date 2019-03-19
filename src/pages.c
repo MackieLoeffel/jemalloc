@@ -514,7 +514,8 @@ pages_set_thp_state (void *ptr, size_t size) {
 
 static void
 init_thp_state(void) {
-	if (!have_madvise_huge) {
+    /* we don't want jemalloc to read from the filesystem */
+	if (!have_madvise_huge || 1 == 1) {
 		if (metadata_thp_enabled() && opt_abort) {
 			malloc_write("<jemalloc>: no MADV_HUGEPAGE support\n");
 			abort();
