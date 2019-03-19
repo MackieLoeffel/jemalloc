@@ -3177,13 +3177,14 @@ je_malloc_usable_size(JEMALLOC_USABLE_SIZE_CONST void *ptr) {
  * to trigger the deadlock described above, but doing so would involve forking
  * via a library constructor that runs before jemalloc's runs.
  */
-#ifndef JEMALLOC_JET
-JEMALLOC_ATTR(constructor)
-static void
-jemalloc_constructor(void) {
-	malloc_init();
-}
-#endif
+/* disabled because this causes problems for rust sandbox */
+/* #ifndef JEMALLOC_JET */
+/* JEMALLOC_ATTR(constructor) */
+/* static void */
+/* jemalloc_constructor(void) { */
+	/* malloc_init(); */
+/* } */
+/* #endif */
 
 #ifndef JEMALLOC_MUTEX_INIT_CB
 void
