@@ -574,18 +574,19 @@ pages_boot(void) {
 	mmap_flags = MAP_PRIVATE | MAP_ANON;
 #endif
 
-#ifdef JEMALLOC_SYSCTL_VM_OVERCOMMIT
-	os_overcommits = os_overcommits_sysctl();
-#elif defined(JEMALLOC_PROC_SYS_VM_OVERCOMMIT_MEMORY)
-	os_overcommits = os_overcommits_proc();
+/* #ifdef JEMALLOC_SYSCTL_VM_OVERCOMMIT */
+	/* os_overcommits = os_overcommits_sysctl(); */
+/* #elif defined(JEMALLOC_PROC_SYS_VM_OVERCOMMIT_MEMORY) */
+	/* os_overcommits = os_overcommits_proc(); */
+	os_overcommits = true;
 #  ifdef MAP_NORESERVE
 	if (os_overcommits) {
 		mmap_flags |= MAP_NORESERVE;
 	}
 #  endif
-#else
-	os_overcommits = false;
-#endif
+/* #else */
+	/* os_overcommits = false; */
+/* #endif */
 
 	init_thp_state();
 
